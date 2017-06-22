@@ -7,6 +7,10 @@
     <title>World of Star Wars</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+    <script type="text/javascript" src="/static/data_manager.js" defer></script>
+    <script type="text/javascript" src="/static/index.js" defer></script>
 </head>
 
 <body>  
@@ -18,7 +22,7 @@
         <button type="button" value="Next page" id="Next page" name="Next page">Next page</button>
     </form>
 
-    <table>
+    <table class=table-bordered id="planets">
         <tr>
             <td>Name</td>
             <td>Diameter</td>
@@ -28,18 +32,35 @@
             <td>Population</td>
             <td>Residents</td>
         </tr>
-        {% for row in planet_table %}
-            <tr>
-                <td>{{ row['name'] }}</td>
-                <td>{{ row['diameter'] }}</td>
-                <td>{{ row['climate'] }}</td>
-                <td>{{ row['terrain'] }}</td>
-                <td>{{ row['surface_water'] }}</td>
-                <td>{{ row['population'] }}</td>
-                <td>No known residents</td>
-            </tr>
-        {% endfor %}
+            <tr id="0"></tr>
+            <tr id="1"></tr>
+            <tr id="2"></tr>
+            <tr id="3"></tr>
+            <tr id="4"></tr>
+            <tr id="5"></tr>
+            <tr id="6"></tr>
+            <tr id="7"></tr>
+            <tr id="8"></tr>
+            <tr id="9"></tr>
     </table>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <table class=table-bordered id="planets">
+        <tr>
+            <td>Name</td>
+            <td>Height</td>
+            <td>Mass</td>
+            <td>Skin color</td>
+            <td>Hair color</td>
+            <td>Eye color</td>
+            <td>Birth year</td>
+            <td>Gender</td>
+        </tr>
+    </table>
+        </div>
+
+</div>
 </body>
 
 </html>
