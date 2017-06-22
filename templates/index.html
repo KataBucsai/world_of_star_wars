@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>World of Star Wars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>  
+
+    <h1>Star Wars Universe Planets</h1>
+
+    <form action="/">
+        <button type="button" value="Previous" id="Previous" name="Previous">Previous</button>
+        <button type="button" value="Next page" id="Next page" name="Next page">Next page</button>
+    </form>
+
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Diameter</td>
+            <td>Climate</td>
+            <td>Terrain</td>
+            <td>Surface_water</td>
+            <td>Population</td>
+            <td>Residents</td>
+        </tr>
+        {% for row in planet_table %}
+            <tr>
+                <td>{{ row['name'] }}</td>
+                <td>{{ row['diameter'] }}</td>
+                <td>{{ row['climate'] }}</td>
+                <td>{{ row['terrain'] }}</td>
+                <td>{{ row['surface_water'] }}</td>
+                <td>{{ row['population'] }}</td>
+                <td>No known residents</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
