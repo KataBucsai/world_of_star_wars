@@ -1,3 +1,20 @@
 table {
     border: 1px;
 }
+
+input[type=submit], select, .button_like_link, #previous, #next-page{
+    background-color: #b3c2db;
+    border: none;
+    color: #404040;
+    text-align: center;
+    text-decoration: none;    
+    padding: 5px 15px; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    font-size: 0.8em;
+    margin-top: 1px;
+}
+
+input[type=submit]:hover, select:hover, .button_like_link:hover {
+    background-color: #ccc;
+    cursor: pointer;

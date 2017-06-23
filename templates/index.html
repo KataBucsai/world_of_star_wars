@@ -13,13 +13,22 @@
     <script type="text/javascript" src="/static/index.js" defer></script>
 </head>
 
-<body>  
-
-    <h1>Star Wars Universe Planets</h1>
+<body>
+    <header class="container">
+      <div class="row">
+        <h1 class="col-sm-8">Star Wars Universe Planets</h1>
+        <div class="col-sm-2">
+        <a href="/registration" class="button_like_link">Registration</a>
+        </div>
+        <div class="col-sm-2">
+        <a href="/login" class="button_like_link">Log in</a>
+        </div>
+      </div>
+    </header>
 
     <form action="/">
-        <button type="button" value="Previous" id="Previous" name="Previous">Previous</button>
-        <button type="button" value="Next page" id="Next page" name="Next page">Next page</button>
+        <button type="button" value="Previous" id="previous" name="Previous">Previous</button>
+        <button type="button" value="Next page" id="next-page" name="Next page">Next page</button>
     </form>
 
     <table class=table-bordered id="planets">
@@ -43,24 +52,6 @@
             <tr id="8"></tr>
             <tr id="9"></tr>
     </table>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <table class=table-bordered id="planets">
-        <tr>
-            <td>Name</td>
-            <td>Height</td>
-            <td>Mass</td>
-            <td>Skin color</td>
-            <td>Hair color</td>
-            <td>Eye color</td>
-            <td>Birth year</td>
-            <td>Gender</td>
-        </tr>
-    </table>
-        </div>
-
-</div>
 </body>
 
 </html>

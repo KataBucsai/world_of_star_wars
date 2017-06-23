@@ -38,3 +38,8 @@ def handle_database(command):
         error_message = "Uh oh, can't connect. Invalid dbname, user or password? \n" + str(e)
         print(error_message)
         sys.exit()
+
+
+def handle_query(sql_query):
+    result = handle_database(sql_query)
+    return result

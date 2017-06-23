@@ -1,18 +1,18 @@
-var getBoardList = (function () {
-    var boardList = JSON.parse(localStorage.getItem('boardList'));
+var getData = (function () {
+    var savedData = JSON.parse(sessionStorage.getItem('savedData'));
     return function () {
-        return boardList;
+        return savedData;
     }
 })();
 
-var initBoardList = (function () {
-    var boardList = {"boards": []};
-    if(!  getBoardList() ){
-        localStorage.setItem('boardList', JSON.stringify(boardList));
+var initData = (function () {
+    var savedData = {'modal':{}, 'user':[]};
+    if(!  getData() ){
+        sessionStorage.setItem('savedData', JSON.stringify(savedData));
     } else {
-        boardList = getBoardList();
+        savedData = getData();
     }
     return function () {
-        return boardList;
+        return savedData;
     }   
 })();
