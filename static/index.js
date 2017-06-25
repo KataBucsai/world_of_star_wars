@@ -36,7 +36,7 @@ function createTable(planetTable){
         var column6 = '<td>' + column6Data + '</td>';
         if (planetTable[i]['residents'].length !== 0) {
             var residentsNumber = planetTable[i]['residents'].length;
-            column7 = '<td><button id="Modalbutton' + i + '">' + residentsNumber + ' resident(s)</button></td>';
+            column7 = '<td><button class="modalbutton" id="Modalbutton' + i + '">' + residentsNumber + ' resident(s)</button></td>';
             getResidentModal(i, column1);
             for (resident=0; resident<residentsNumber; resident++){
                 var residentLink = planetTable[i]['residents'][resident]; 
@@ -61,13 +61,12 @@ function showResidents(orderNumber){
         var modal_button_id = "Modalbutton" + String(orderNumber);
         var btn = document.getElementById(modal_button_id);
         var span = document.getElementsByClassName("close")[0];
-        console.log(span);
         btn.onclick = function() {
             modal.style.display = "block";
         };
-        $('.close').on('click', function() {
-            $('#modal').hide();
-        });
+        span.onclick = function() {
+            modal.style.display = "block";
+        };
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
