@@ -1,5 +1,8 @@
 body {
+    background-color: black;
     background-image: url("swplanets.jpg");
+    background-repeat: repeat-x;
+    background-position: center top;
 }
 
 table {
