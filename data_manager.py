@@ -34,7 +34,7 @@ def handle_database(command):
             return table
         cursor.close()
         conn.close()
-    except Exception as e:
+    except psycopg2.DatabaseError as e:
         error_message = "Uh oh, can't connect. Invalid dbname, user or password? \n" + str(e)
         print(error_message)
         sys.exit()

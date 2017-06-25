@@ -3,84 +3,110 @@ function main(){
 }
 
 function getPlanets(apiLink){
+    var previous;
+    var next;
     $.getJSON(apiLink, function(response){
         var planetTable=response['results'];
-        var previous=response['previous'];
-        var next=response['next'];
-        var planetWithResident =  createTable(planetTable);
-        showResidents(planetWithResident);
-    })
+        previous=response['previous'];
+        next=response['next'];
+        createTable(planetTable);
+    }).then(function(){
+        $('#previous').on('click', function() {
+            console.log(previous);
+            getPlanets(previous);
+        });
+        $('#next-page').on('click', function() {
+            console.log(next);
+            getPlanets(next);
+        });
+    });
 }
 
 function createTable(planetTable){
-    var planetWithResident = [];
     for (var i=0; i<planetTable.length; i++){
+        $('#' + i).empty();
         var column1 = '<td>' + planetTable[i]['name'] + '</td>';
-        var column2 = '<td>' + planetTable[i]['diameter'] + '</td>';
+        var column2Data = toLocaleStringSupportsLocales(planetTable[i]['diameter'], ' km');
+        var column2 = '<td>' + column2Data + '</td>';
         var column3 = '<td>' + planetTable[i]['climate'] + '</td>';
         var column4 = '<td>' + planetTable[i]['terrain'] + '</td>';
-        var column5 = '<td>' + planetTable[i]['surface_water'] + '</td>';
-        var column6 = '<td>' + planetTable[i]['population'] + '</td>';
+        var column5Data = toLocaleStringSupportsLocales(planetTable[i]['surface_water'], ' %');
+        var column5 = '<td>' + column5Data + '</td>';
+        var column6Data = toLocaleStringSupportsLocales(planetTable[i]['population'], ' people');
+        var column6 = '<td>' + column6Data + '</td>';
         if (planetTable[i]['residents'].length !== 0) {
             var residentsNumber = planetTable[i]['residents'].length;
-            column7 = '<td><button id="Modalbutton' + i + '">' + residentsNumber + ' residents</button></td>';
+            column7 = '<td><button id="Modalbutton' + i + '">' + residentsNumber + ' resident(s)</button></td>';
+            getResidentModal(i, column1);
             for (resident=0; resident<residentsNumber; resident++){
-                var residentLink = planetTable[i]['residents'][resident];
-                console
-                getResident(residentLink, i);
+                var residentLink = planetTable[i]['residents'][resident]; 
+                getResident(residentLink, i);   
             }
-            planetWithResident.push(i);
         } else {
             column7 = '<td>No known residents</td>';
         }
         var tRText =column1 + column2 + column3 +  column4 + column5 + column6 + column7;
+        
         var newTR = $(tRText);
         $('#' + i).append(newTR);
-        
-        
-    }
-    return planetWithResident;
-    
+        if (column7 !== '<td>No known residents</td>'){
+            showResidents(i);
+        }   
+    }    
 }
 
-function showResidents(planetWithResident){
-    for (let i=0; i<planetWithResident.length; orderNumber++){
-        orderNumber = planetWithResident[i];
-        var modal = document.getElementById(orderNumber + 'Modal');
-        var btn = document.getElementById("Modalbutton" + orderNumber);
+function showResidents(orderNumber){
+        var modal_id = String(orderNumber) + 'Modal';
+        var modal = document.getElementById(modal_id);
+        var modal_button_id = "Modalbutton" + String(orderNumber);
+        var btn = document.getElementById(modal_button_id);
         var span = document.getElementsByClassName("close")[0];
-        console.log(modal,"+", btn,"+", span);
+        console.log(span);
         btn.onclick = function() {
             modal.style.display = "block";
-        }
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        };
+        $('.close').on('click', function() {
+            $('#modal').hide();
+        });
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
+        };
     }
+
+function getResidentModal(orderNumber, planetName){
+                var modalMainText1 = '<div id="' + orderNumber + 'Modal" class="modal"><div class="modal-content"><div class="modal-header"><span class="close" id="close">&times;</span><h2>Resident(s) of ' + planetName + '</h2>';
+                var modalMainText2 = '</div><div class="modal-body"><table class="table-bordered"><thead><tr><th>Name</th><th>Height</th><th>Mass</th><th>Skin color</th><th>Hair color</th><th>Eye color</th><th>Birth year</th><th>Gender</th></tr>';
+                var modalMainText3 = '</thead><tbody id="' + orderNumber + 'planet"></tbody></table></div></div></div>';
+                var modalText = modalMainText1 + modalMainText2 + modalMainText3;
+                $('body').append(modalText);
 }
 
 function getResident(residentLink, orderNumber){
     $.getJSON(residentLink, function(response){
-                var modalMainText1 = '<div id="' + orderNumber + 'Modal" class="modal"><div class="modal-content"><span class="close">&times;</span><table class=table-bordered id="planets"><tr><td>Name</td><td>Height</td><td>Mass</td><td>Skin color</td><td>Hair color</td><td>Eye color</td><td>Birth year</td><td>Gender</td></tr>';
-                var modalMainText2 = '</table></div></div>';
                 var modalcolumn1 = '<td>' + response['name'] + '</td>';
-                var modalcolumn2 = '<td>' + response['height'] + '</td>';
-                var modalcolumn3 = '<td>' + response['mass'] + '</td>';
-                var modalcolumn4 = '<td>' + response['skin color'] + '</td>';
-                var modalcolumn5 = '<td>' + response['hair color'] + '</td>';
-                var modalcolumn6 = '<td>' + response['eye color'] + '</td>';
-                var modalcolumn7 = '<td>' + response['birth year'] + '</td>';
+                var modalcolumn2Data = toLocaleStringSupportsLocales(response['height'], " cm");
+                var modalcolumn2 = '<td>' + modalcolumn2Data + '</td>';
+                var modalcolumn3Data = toLocaleStringSupportsLocales(response['mass'], " kg");
+                var modalcolumn3 = '<td>' + modalcolumn3Data + '</td>';
+                var modalcolumn4 = '<td>' + response['skin_color'] + '</td>';
+                var modalcolumn5 = '<td>' + response['hair_color'] + '</td>';
+                var modalcolumn6 = '<td>' + response['eye_color'] + '</td>';
+                var modalcolumn7 = '<td>' + response['birth_year'] + '</td>';
                 var modalcolumn8 = '<td>' + response['gender'] + '</td>';
                 var modalcolumns = modalcolumn1 + modalcolumn2 + modalcolumn3 + modalcolumn4 + modalcolumn5 + modalcolumn6 +modalcolumn7 + modalcolumn8;
-                var modalText = modalMainText1 + modalcolumns + modalMainText2;
-                $('body').append(modalText);
-            })
-    
+                var modalText =  "<tr>" + modalcolumns + "</tr>";
+                modal_id = '#' + String(orderNumber) + 'planet';
+                $(modal_id).append(modalText);
+    });
+}
+
+function toLocaleStringSupportsLocales(data, suffix) {
+    if (! isNaN(data)){
+        return (Number(data).toLocaleString() + suffix)
+    }
+    return data;
 }
 
 $(document).ready(main);

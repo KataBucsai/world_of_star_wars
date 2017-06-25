@@ -1,5 +1,7 @@
 table {
+    margin: 20px;
     border: 1px;
+    border-color: olivedrab;
 }
 
 input[type=submit], select, .button_like_link, #previous, #next-page{
@@ -12,9 +14,79 @@ input[type=submit], select, .button_like_link, #previous, #next-page{
     -webkit-border-radius: 5px;
     border-radius: 5px; 
     font-size: 0.8em;
-    margin-top: 1px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 input[type=submit]:hover, select:hover, .button_like_link:hover {
     background-color: #ccc;
     cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: olivedrab;
+    color: white;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+th {
+    background-color: olivedrab;
+    color: white;
+    text-align: center;
+    padding: 2px 5px;
+}
+
+td {
+    padding: 2px 5px;
+    text-align: center;
+}
+
+h1 {
+    color: olivedrab;
+}
+
+.col-sm-2 {
+    margin-top: 30px;
+    align-items: center;
+}

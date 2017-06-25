@@ -17,12 +17,21 @@
     <header class="container">
       <div class="row">
         <h1 class="col-sm-8">Star Wars Universe Planets</h1>
-        <div class="col-sm-2">
-        <a href="/registration" class="button_like_link">Registration</a>
-        </div>
-        <div class="col-sm-2">
-        <a href="/login" class="button_like_link">Log in</a>
-        </div>
+        {% if loggedin == False %}
+            <div class="col-sm-2">
+            <a href="/registration" class="button_like_link">Registration</a>
+            </div>
+            <div class="col-sm-2">
+            <a href="/login" class="button_like_link">Log in</a>
+            </div>
+        {% else %}
+            <div class="col-sm-2">
+            <p id="user_name"> {{ username }} </p>
+            </div>
+            <div class="col-sm-2">
+            <a href="/logout" class="button_like_link">Log out</a>
+            </div>
+        {% endif %}
       </div>
     </header>
 
@@ -33,13 +42,13 @@
 
     <table class=table-bordered id="planets">
         <tr>
-            <td>Name</td>
-            <td>Diameter</td>
-            <td>Climate</td>
-            <td>Terrain</td>
-            <td>Surface_water</td>
-            <td>Population</td>
-            <td>Residents</td>
+            <th>Name</th>
+            <th>Diameter</th>
+            <th>Climate</th>
+            <th>Terrain</th>
+            <th>Surface_water</th>
+            <th>Population</th>
+            <th>Residents</th>
         </tr>
             <tr id="0"></tr>
             <tr id="1"></tr>
