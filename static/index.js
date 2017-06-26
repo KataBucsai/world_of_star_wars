@@ -1,5 +1,5 @@
 function main(){
-    getPlanets('http://swapi.co/api/planets/');   
+    getPlanets('https://swapi.co/api/planets/');   
 }
 
 function getPlanets(apiLink){
@@ -8,7 +8,9 @@ function getPlanets(apiLink){
     $.getJSON(apiLink, function(response){
         var planetTable=response['results'];
         previous=response['previous'];
+        previous = previous.replace("http", "https");
         next=response['next'];
+        next = next.replace("http", "https");
         createTable(planetTable);
     }).then(function(){
         $('#previous').on('click', function() {
