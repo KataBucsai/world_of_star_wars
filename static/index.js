@@ -41,7 +41,7 @@ function createTable(planetTable){
             column7 = '<td><button class="modalbutton" id="Modalbutton' + i + '">' + residentsNumber + ' resident(s)</button></td>';
             getResidentModal(i, column1);
             for (resident=0; resident<residentsNumber; resident++){
-                var residentLink = planetTable[i]['residents'][resident]; 
+                var residentLink = planetTable[i]['residents'][resident].replace("http", "https"); 
                 getResident(residentLink, i);   
             }
         } else {
