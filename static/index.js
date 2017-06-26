@@ -8,9 +8,13 @@ function getPlanets(apiLink){
     $.getJSON(apiLink, function(response){
         var planetTable=response['results'];
         previous=response['previous'];
-        previous = previous.replace("http", "https");
+        if (previous) {
+            previous = previous.replace("http", "https");
+        };
         next=response['next'];
-        next = next.replace("http", "https");
+        if (next) {
+            next = next.replace("http", "https");
+        };
         createTable(planetTable);
     }).then(function(){
         $('#previous').on('click', function() {
