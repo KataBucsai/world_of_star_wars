@@ -72,7 +72,7 @@ function showResidents(orderNumber){
                 modal.style.display = "none";
             }
         };
-    }
+}
 
 function getResidentModal(orderNumber, planetName){
                 var modalMainText1 = '<div id="' + orderNumber + 'Modal" class="modal"><div class="modal-content"><div class="modal-header"><span class="close" id="close">&times;</span><h2>Resident(s) of ' + planetName + '</h2>';

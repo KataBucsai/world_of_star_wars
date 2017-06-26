@@ -1,4 +1,6 @@
 import psycopg2
+import os
+import urllib
 import sys
 import config
 import public_config
@@ -23,9 +25,15 @@ def getDbConfig(settings):
 
 def handle_database(command):
     try:
-        config_data = getDbConfig(config.getSettings())
-        connect_str = "dbname='" + config_data['db_name'] + "' user='" + config_data['user'] + "' host='" + config_data['host'] + "' password='" + config_data['password'] + "'"
-        conn = psycopg2.connect(connect_str)
+        urllib.parse.uses_netloc.append('postgres')
+        url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+        conn = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
         conn.autocommit = True
         cursor = conn.cursor()
         cursor.execute(command)
