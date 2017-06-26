@@ -3,24 +3,6 @@ import os
 import urllib
 import sys
 import config
-import public_config
-import private_config
-
-
-def getDbConfig(settings):
-    db_settings = settings['db_settings']
-
-    is_dev = True
-    is_test = False
-    is_prod = False
-
-    if is_dev:
-        return db_settings['dev']
-    elif is_test:
-        return db_settings['test']
-    elif is_prod:
-        return db_settings['prod']
-    return dict()
 
 
 def handle_database(command):
